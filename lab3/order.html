@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Toy</title>
+    <link rel="stylesheet" href="StyleSheet2.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Логотип">
+            </a>
+        </div>
+        <div class="h1">
+            <h1>Оформление заказа</h1>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="toys.html">Игрушки</a></li>
+            <li><a href="order.html">Заказ</a></li>
+            <li><a href="about.html">О нас</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Выберите игрушку</h2>
+        <form action="submit_order.php" method="post">
+            <label for="toy">Выбор игрушки:</label>
+            <select id="toy" name="toy">
+                <option value="toy1">LEGO Star Wars</option>
+                <option value="toy2">Монополия</option>
+                <option value="toy3">Uno</option>
+                <option value="toy3">LEGO AT-AT</option>
+                <option value="toy3">Мягкая игрушка корги</option>
+                <option value="toy3">Машинка на радиоуправлении</option>
+                <option value="toy3">LEGO Porsche 911</option>
+                <option value="toy3">Пазлы</option>
+                <option value="toy3">Hot Wheels</option>
+            </select>
+            <br>
+            <label for="quantity">Количество:</label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1">
+            <br>
+            <label for="name">Введите Имя:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="email">Введите Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <button type="submit">Оформить заказ</button>
+        </form>
+    </main>
+    <script>
+        // Функция для сохранения данных заказа в localStorage
+        function saveOrder() {
+            const selectedToy = document.getElementById("toy").value;
+            const quantity = document.getElementById("quantity").value;
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+
+            const orderData = {
+                selectedToy,
+                quantity,
+                name,
+                email,
+            };
+
+            localStorage.setItem("order", JSON.stringify(orderData));
+        }
+
+        // Функция для загрузки данных заказа из localStorage
+        function loadOrder() {
+            const orderData = localStorage.getItem("order");
+            if (orderData) {
+                const parsedOrder = JSON.parse(orderData);
+                document.getElementById("toy").value = parsedOrder.selectedToy;
+                document.getElementById("quantity").value = parsedOrder.quantity;
+                document.getElementById("name").value = parsedOrder.name;
+                document.getElementById("email").value = parsedOrder.email;
+            }
+        }
+
+        // Вызов функции loadOrder при загрузке страницы
+        window.addEventListener("load", loadOrder);
+    </script>
+
+</body>
+</html>

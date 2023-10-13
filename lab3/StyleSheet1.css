@@ -1,0 +1,124 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(background2.avif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+header {
+    background-color: rgba(0, 191, 255, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    margin-left: 20px;
+}
+
+    .logo img {
+        width: 120px;
+        height: auto;
+    }
+
+.h1 {
+    margin-left: -120px;
+    color: #333;
+    flex: 1;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    background-color: rgba(0, 191, 255, 0.4);
+    text-align: center;
+}
+
+nav li {
+    display: inline;
+    margin: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+    nav a:hover {
+        color: #dc143c;
+    }
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+.featured-toys {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Центрируем элементы по горизонтали */
+    align-items: center; /* Центрируем элементы по вертикали */
+    flex-direction: column; /* Устанавливаем направление flex на вертикальное */
+}
+
+.toy img {
+    width: 100%;
+    height: auto;
+}
+
+.toy {
+    width: calc(45% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+    .toy h3 {
+        font-size: 20px;
+        color: #333;
+        margin-top: 10px;
+    }
+
+    .toy p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+
+    .toy a {
+        display: inline-block;
+        background-color: rgba(30, 191, 255, 0.8);
+        color: white;
+        padding: 5px 15px;
+        text-decoration: none;
+        border-radius: 3px;
+        transition: background-color 0.3s;
+    }
+
+        .toy a:hover {
+            background-color: lightgreen;
+        }
+
+.customer-reviews {
+    margin-top: 20px;
+}
+
+.review {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
