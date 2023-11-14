@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Определение типа треугольника</title>
+    <link rel="stylesheet" href="StyleSheet7.css" />
+</head>
+<body>
+    <h1>Определение типа треугольника</h1>
+
+    <form name="triangleForm">
+        <script type="text/javascript">
+            function checkTriangle(obj) {
+                var x1 = parseFloat(obj.x1.value);
+                var y1 = parseFloat(obj.y1.value);
+                var x2 = parseFloat(obj.x2.value);
+                var y2 = parseFloat(obj.y2.value);
+                var x3 = parseFloat(obj.x3.value);
+                var y3 = parseFloat(obj.y3.value);
+
+                var sideAB = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                var sideBC = Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
+                var sideCA = Math.sqrt(Math.pow(x1 - x3, 2) + Math.pow(y1 - y3, 2));
+
+                var resultText = "";
+                if (sideAB === sideBC && sideBC === sideCA) {
+                    resultText = 'Треугольник равносторонний.';
+                } else {
+                    resultText = 'Треугольник не является равносторонним.';
+                }
+
+                obj.result.value = resultText;
+            }
+        </script>
+
+        Вершина A (x, y):
+        <input type="number" id="x1" name="x1" placeholder="x">
+        <input type="number" id="y1" name="y1" placeholder="y"><br>
+
+        Вершина B (x, y):
+        <input type="number" id="x2" name="x2" placeholder="x">
+        <input type="number" id="y2" name="y2" placeholder="y"><br>
+
+        Вершина C (x, y):
+        <input type="number" id="x3" name="x3" placeholder="x">
+        <input type="number" id="y3" name="y3" placeholder="y"><br>
+
+        <button class="button" type="button" onclick="checkTriangle(triangleForm)">Определить тип треугольника</button><br>
+
+        Результат:
+        <input class="result" type="text" size="75" name="result"><br>
+
+        <input type="reset">
+    </form>
+
+
+    <!--задание 2-->
+
+
+        <div class="container">
+            <h1>Определение совершенного числа</h1>
+
+            <form name="perfectNumberForm">
+                <input type="number" id="numberInput" placeholder="Введите число"><br />
+                <button class="button" type="button" onclick="checkPerfectNumber()">Проверить</button>
+
+                <div id="result"></div>
+            </form>
+        </div>
+
+        <script>
+            function checkPerfectNumber() {
+                const number = parseInt(document.getElementById('numberInput').value);
+
+                if (isPerfectNumber(number)) {
+                    document.getElementById('result').innerText = number + ' является совершенным числом.';
+                } else {
+                    document.getElementById('result').innerText = number + ' не является совершенным числом.';
+                }
+            }
+
+            function isPerfectNumber(num) {
+                if (num <= 1) {
+                    return false;
+                }
+
+                let sum = 1;
+
+                for (let i = 2; i <= Math.sqrt(num); i++) {
+                    if (num % i === 0) {
+                        sum += i;
+                        if (i !== num / i) {
+                            sum += num / i;
+                        }
+                    }
+                }
+
+                return sum === num;
+            }
+        </script>
+    </body>
+</html>
