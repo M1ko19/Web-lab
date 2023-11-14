@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анализ чисел</title>
+    <link rel="stylesheet" href="StyleSheet8.css" />
+</head>
+<body>
+    <h1>Анализ чисел</h1>
+
+    <form name="numberForm">
+        <label for="numbers">Введите 10 вещественных чисел, разделенных пробелами:</label>
+        <input type="text" id="numbers" placeholder="Например: 1.5 -2 0 3.2 ..." required>
+        <button class="button" type="button" onclick="analyzeNumbers()">Анализировать</button>
+        <div class="result-text" id="result"></div>
+
+    </form>
+
+
+    <script>
+        function analyzeNumbers() {
+            const inputNumbers = document.getElementById('numbers').value.trim().split(/\s+/).map(Number);
+
+            if (inputNumbers.length !== 10 || inputNumbers.some(isNaN)) {
+                alert('Введите ровно 10 вещественных чисел.');
+                return;
+            }
+
+            const positiveNumbers = inputNumbers.filter(num => num > 0);
+            const negativeNumbers = inputNumbers.filter(num => num < 0);
+            const zeroNumbers = inputNumbers.filter(num => num === 0);
+
+            const resultText = `
+                                    Количество положительных чисел: ${positiveNumbers.length}<br>
+                                    Количество отрицательных чисел: ${negativeNumbers.length}<br>
+                                    Количество нулевых чисел: ${zeroNumbers.length}
+                                `;
+
+            document.getElementById('result').innerHTML = resultText;
+        }
+    </script>
+
+
+    <!--задание 2-->
+
+
+    <h1>Информация о телеканалах</h1>
+    <div class="container">
+
+        <form name="channelForm">
+            <label for="nameInput">Название телеканала:</label>
+            <input type="text" id="nameInput" placeholder="Введите название">
+
+            <label for="genreInput">Жанр телеканала:</label>
+            <input type="text" id="genreInput" placeholder="Введите жанр">
+
+            <label for="audienceInput">Аудитория телеканала (млн. чел.):</label>
+            <input type="text" id="audienceInput" placeholder="Введите аудиторию">
+
+            <button type="button" class="button" onclick="createChannel()">Создать Телеканал</button>
+        </form>
+
+        <div id="channelsInfo" class="result-text"></div>
+    </div>
+
+    <script>
+        function createChannel() {
+            const name = document.getElementById('nameInput').value;
+            const genre = document.getElementById('genreInput').value;
+            const audience = document.getElementById('audienceInput').value;
+
+            const newChannel = new TVChannel(name, genre, audience);
+            const newChannelInfo = newChannel.displayInfo();
+
+            const channelsInfoElement = document.getElementById('channelsInfo');
+            const pElement = document.createElement('p');
+            pElement.textContent = newChannelInfo;
+            channelsInfoElement.appendChild(pElement);
+        }
+
+            // Создаем конструктор объекта Телеканал
+            function TVChannel(name, genre, audience) {
+                this.name = name;
+            this.genre = genre;
+            this.audience = audience;
+
+            // Метод для вывода информации о телеканале
+            this.displayInfo = function() {
+                    return `${this.name} (${this.genre}) - Аудитория: ${this.audience} млн. чел.`;
+                };
+
+            // Метод для изменения жанра телеканала
+            this.changeGenre = function(newGenre) {
+                this.genre = newGenre;
+                };
+            }
+
+            // Собираем информацию о телеканалах
+            const channelsInfo = [
+            channel1.displayInfo(),
+            channel2.displayInfo(),
+            channel3.displayInfo(),
+            channel4.displayInfo(),
+            channel5.displayInfo(),
+            channel6.displayInfo(),
+            channel7.displayInfo(),
+            channel8.displayInfo(),
+            channel9.displayInfo(),
+            channel10.displayInfo(),
+            ];
+
+            // Выводим информацию на страницу
+            const channelsInfoElement = document.getElementById('channelsInfo');
+            channelsInfo.forEach(info => {
+                const pElement = document.createElement('p');
+            pElement.textContent = info;
+            channelsInfoElement.appendChild(pElement);
+            });
+    </script>
+</body>
+</html>
