@@ -1,46 +1,53 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Анализ чисел</title>
     <link rel="stylesheet" href="StyleSheet8.css" />
+    <title>Анализ чисел</title>
 </head>
 <body>
-    <h1>Анализ чисел</h1>
 
-    <form name="numberForm">
-        <label for="numbers">Введите 10 вещественных чисел, разделенных пробелами:</label>
-        <input type="text" id="numbers" placeholder="Например: 1.5 -2 0 3.2 ..." required>
-        <button class="button" type="button" onclick="analyzeNumbers()">Анализировать</button>
-        <div class="result-text" id="result"></div>
+    <h1>Введите 10 вещественных чисел</h1>
 
+    <form id="numberForm">
+        <label for="numbers">Введите числа через пробел:</label>
+        <input type="text" id="numbers" required>
+        <button type="button" class="button" onclick="analyzeNumbers()">Анализировать</button>
+        <p>Результаты анализа:</p>
+        <p id="result"></p>
     </form>
 
 
     <script>
         function analyzeNumbers() {
-            const inputNumbers = document.getElementById('numbers').value.trim().split(/\s+/).map(Number);
+            // Получаем введенные числа из формы
+            const numbersInput = document.getElementById('numbers').value;
 
-            if (inputNumbers.length !== 10 || inputNumbers.some(isNaN)) {
-                alert('Введите ровно 10 вещественных чисел.');
-                return;
-            }
+            // Преобразуем строку в массив чисел, используя объект Array
+            const numbersArray = Array.from(numbersInput.split(' '), Number);
 
-            const positiveNumbers = inputNumbers.filter(num => num > 0);
-            const negativeNumbers = inputNumbers.filter(num => num < 0);
-            const zeroNumbers = inputNumbers.filter(num => num === 0);
+            // Инициализируем счетчики
+            let positiveCount = 0;
+            let negativeCount = 0;
+            let zeroCount = 0;
 
-            const resultText = `
-                                    Количество положительных чисел: ${positiveNumbers.length}<br>
-                                    Количество отрицательных чисел: ${negativeNumbers.length}<br>
-                                    Количество нулевых чисел: ${zeroNumbers.length}
-                                `;
+            // Проходим по массиву и считаем положительные, отрицательные и нулевые числа
+            numbersArray.forEach(number => {
+                if (number > 0) {
+                    positiveCount++;
+                } else if (number < 0) {
+                    negativeCount++;
+                } else {
+                    zeroCount++;
+                }
+            });
 
-            document.getElementById('result').innerHTML = resultText;
+            // Используем объект String для форматирования результата
+            const resultText = String(`Положительных чисел: ${positiveCount}, Отрицательных чисел: ${negativeCount}, Нулей: ${zeroCount}`);
+            document.getElementById('result').innerText = resultText;
         }
     </script>
-
 
     <!--задание 2-->
 
