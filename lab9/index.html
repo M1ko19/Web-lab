@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,17 +30,27 @@
         }
 
         input[type="text"] {
-            width: 100%;
+            width: calc(100% - 12px); /* учитываем padding и border */
             padding: 5px;
             margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 3px;
+            box-sizing: border-box;
+            display: inline-block;
         }
-
-        .required-star {
-            color: red;
-            margin-left: 3px;
+            input[type="email"]{
+            width: calc(100% - 12px); /* учитываем padding и border */
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            display: inline-block;
         }
+            .required-star {
+                color: red;
+                margin-left: 3px;
+            }
 
             .required-star:hover::before {
                 content: "Обязательное поле";
@@ -71,22 +81,44 @@
             input[type="submit"]:hover {
                 background-color: #0056b3;
             }
+
+        .half-width {
+            width: 50%;
+        }
+
+        .country-code {
+            width: 20%;
+        }
+
+        .phone-input {
+            width: 85%;
+        }
     </style>
 </head>
 <body>
 
-    <form name="registrationForm" onsubmit="return ConfirmSubmit();">
+    <form name="registrationForm" onsubmit="return CheckData();">
         <label for="name">Имя:<span class="required-star" title="Обязательное поле">*</span></label>
-        <input type="text" id="name" name="name" required>
+        <input type="text"  id="name" name="name" required>
         <br>
         <label for="organization">Организация:</label>
-        <input type="text" id="organization" name="organization">
+        <input  type="text" id="organization" name="organization" class="half-width">
         <br>
         <label for="phone">Телефон:</label>
-        <input type="text" id="phone" name="phone">
+        <select id="countryCode" name="countryCode" class="country-code">
+            <option value="+7">+7</option>
+            <option value="+380">+380</option>
+            <option value="+1">+1</option>
+            <option value="+44">+44</option>
+            <option value="+49">+49</option>
+            <option value="+81">+81</option>
+            <option value="+33">+33</option>
+            <!-- Добавьте другие коды стран по необходимости -->
+        </select>
+        <input placeholder="XXX-XXX-XX-XX" type="text" id="phone" name="phone" pattern="\d{3}-\d{3}-\d{2}-\d{2}" title="Введите номер в формате XXX-XXX-XX-XX" required class="phone-input">
         <br>
         <label for="email">Адрес эл.почты:<span class="required-star" title="Обязательное поле">*</span></label>
-        <input type="text" id="email" name="email" required>
+        <input type="email" id="email" pattern="([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})" name="email" required>
         <br>
         <input type="submit" value="Отправить">
         <input type="reset" value="Очистить">
@@ -96,6 +128,7 @@
         function CheckData() {
             var name = document.getElementById("name").value;
             var organization = document.getElementById("organization").value;
+            var countryCode = document.getElementById("countryCode").value;
             var phone = document.getElementById("phone").value;
             var email = document.getElementById("email").value;
 
@@ -112,12 +145,15 @@
                 return false;
             }
 
+            // Проверка формата телефона
+            var phonePattern = /^\d{3}-\d{3}-\d{2}-\d{2}$/;
+            if (!phonePattern.test(phone)) {
+                alert("Пожалуйста, введите корректный номер телефона в формате 999-999-99-99.");
+                return false;
+            }
+
             // Если все проверки пройдены, можно отправить данные
             return true;
-        }
-
-        function ConfirmSubmit() {
-            return confirm("Вы действительно хотите отправить данные?");
         }
     </script>
 
